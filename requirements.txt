@@ -1,11 +1,26 @@
+# Scraping
 requests
 beautifulsoup4
 lxml
 tenacity
+
+# Data processing
 pandas
 rapidfuzz
+
+# Database (MySQL 8)
 sqlalchemy
-psycopg2-binary
+pymysql
+cryptography
 python-dotenv
+
+# Dashboard
 streamlit
 plotly
+
+# REST API
+fastapi
+uvicorn
+
+# Testing
+pytest
