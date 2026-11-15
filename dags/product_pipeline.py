@@ -100,7 +100,7 @@ with DAG(
     catchup=False,
     tags=["capstone", "etl"],
 
-        on_success_callback=_run_success,
+    on_success_callback=_run_success,
     on_failure_callback=_run_failure,
     
 ) as dag:
