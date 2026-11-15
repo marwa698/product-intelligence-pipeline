@@ -14,14 +14,6 @@ def _task_failure_alert(context):
     from etl.alerts import task_failure_alert
     task_failure_alert(context)
 
-def _run_success(context):
-    from etl.run_log import write_run_log
-    write_run_log(context, "success")
-
-
-def _run_failure(context):
-    from etl.run_log import write_run_log
-    write_run_log(context, "failed")
 
 default_args = {
     "owner": "team",
@@ -89,6 +81,10 @@ def task_quality_check(**context):
         ti.xcom_pull(task_ids="clean", key="clean_path"),
         ti.xcom_pull(task_ids="clean", key="rejected_path"),
     )
+    from etl.run_log import write_run_log_from_task
+    write_run_log_from_task(ti, context["dag_run"], "success")
+
+
 
 
 with DAG(
@@ -100,9 +96,7 @@ with DAG(
     catchup=False,
     tags=["capstone", "etl"],
 
-    on_success_callback=_run_success,
-    on_failure_callback=_run_failure,
-    
+   
 ) as dag:
     scrape = PythonOperator(task_id="scrape", python_callable=task_scrape)
     validate = PythonOperator(task_id="validate", python_callable=task_validate)
