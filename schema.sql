@@ -1,7 +1,7 @@
 -- =====================================================
 -- schema.sql : Web-to-Warehouse Product Intelligence Pipeline
 -- Database : MySQL 8.0+
--- Owner : Member 2 (Gany Mohamed)
+-- Owner : Member 2 (jana Mohamed)
 -- =====================================================
 
 CREATE DATABASE IF NOT EXISTS products_db
@@ -67,18 +67,5 @@ CREATE TABLE IF NOT EXISTS etl_quality_log (
     check_name VARCHAR(100),
     status VARCHAR(10),        -- 'PASS' or 'FAIL'
     details TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
--- 6) Pipeline run log: one row per pipeline run (used by the Pipeline Health page)
-CREATE TABLE IF NOT EXISTS pipeline_run_log (
-    run_id INT AUTO_INCREMENT PRIMARY KEY,
-    dag_run_id VARCHAR(250),
-    start_time DATETIME,
-    end_time DATETIME,
-    duration_sec INT,
-    status VARCHAR(20),          -- 'success' or 'failed'
-    rows_scraped INT,
-    rows_loaded INT,
-    rows_rejected INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
